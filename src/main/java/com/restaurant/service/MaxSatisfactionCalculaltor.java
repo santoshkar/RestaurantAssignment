@@ -33,21 +33,20 @@ public class MaxSatisfactionCalculaltor {
 	 * @param noOfItems: total no of dishes
 	 * @return
 	 */
-	private int knapSackAlgorithm(int maxGivenTime, int timeTaken[], int satisfaction[], int noOfItems)
-    {
+	private int knapSackAlgorithm(int maxGivenTime, int timeTaken[], int satisfaction[], int noOfItems) {
         int index, capacity;
         int [][]arrSatisfactionAndTime = new int[noOfItems+1][maxGivenTime+1];
  
-        for (index = 0; index <= noOfItems; index++)
-        {
-            for (capacity = 0; capacity <= maxGivenTime; capacity++)
-            {
+        for (index = 0; index <= noOfItems; index++) {
+            for (capacity = 0; capacity <= maxGivenTime; capacity++) {
                 if (index==0 || capacity==0)
                     arrSatisfactionAndTime[index][capacity] = 0;
-                else if (timeTaken[index-1] <= capacity)
+                else if (timeTaken[index-1] <= capacity){
                     arrSatisfactionAndTime[index][capacity] = findMaxValue(satisfaction[index-1] + arrSatisfactionAndTime[index-1][capacity-timeTaken[index-1]],  arrSatisfactionAndTime[index-1][capacity]);
-                else
+                }
+                else{
                     arrSatisfactionAndTime[index][capacity] = arrSatisfactionAndTime[index-1][capacity];
+                }
             }
         }
  
